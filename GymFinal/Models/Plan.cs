@@ -23,4 +23,4 @@ namespace GymFinal.Models
 
         //hola
     }
-}
+
