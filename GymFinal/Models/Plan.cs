@@ -17,7 +17,5 @@ namespace GymFinal.Models
 
         public ICollection<Socio> Socios { get; set; }
 
-        //Prueba limpia
-
     }
 }
