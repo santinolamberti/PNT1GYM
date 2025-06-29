@@ -69,7 +69,7 @@ namespace GymFinal.Controllers
         public IActionResult Edit(Socio socio)
         {
             if (ModelState.IsValid)
-            {
+        {
                 _context.Socios.Update(socio);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,7 +85,7 @@ namespace GymFinal.Controllers
         {
             var socio = _context.Socios.Find(id);
             if (socio != null)
-            {
+        {
                 _context.Socios.Remove(socio);
                 _context.SaveChanges();
             }
