@@ -1,0 +1,59 @@
+﻿@model List<GymFinal.Models.Socio>
+@{
+    ViewData["Title"] = "Listado de Socios";
+    var sedes = ViewBag.Sedes as List<GymFinal.Models.Sede>;
+}
+
+<h2>Listado de Socios</h2>
+
+<form method="get" asp-action="Index">
+    <label for="sedeId">Filtrar por Sede:</label>
+    <select name="sedeId" id="sedeId" class="form-control" onchange="this.form.submit()">
+        <option value="">-- Todas las sedes --</option>
+
+        @foreach (var sede in sedes)
+        {
+            bool esSeleccionada = ViewContext.HttpContext.Request.Query["sedeId"] == sede.IdSede.ToString();
+            <option value="@sede.IdSede" selected="@(esSeleccionada ? "selected" : null)">
+                @sede.Nombre
+            </option>
+        }
+    </select>
+
+
+</form>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Email</th>
+            <th>Plan</th>
+            <th>Sede</th>
+            <th>Activo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var socio in Model)
+        {
+            <tr>
+                <td>@socio.Nombre</td>
+                <td>@socio.Apellido</td>
+                <td>@socio.Dni</td>
+                <td>@socio.Email</td>
+                <td>@socio.Plan?.NombrePlan</td>
+                <td>@socio.Sede?.Nombre</td>
+                <td>@(socio.EstaActivo ? "Sí" : "No")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@socio.IdSocio">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@socio.IdSocio" onclick="return confirm('¿Seguro que deseas eliminar?');">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Agregar nuevo socio</a>
