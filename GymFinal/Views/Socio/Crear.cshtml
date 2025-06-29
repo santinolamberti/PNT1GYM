@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Crear Nuevo Socio";
+}
+
+<style>
+    /* Estilos copiados de tu Home/Index.cshtml y adaptados */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        /* Asegúrate de que esta URL sea accesible */
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Mantiene la imagen fija al scroll */
+        font-family: Arial, sans-serif; /* Puedes ajustar la fuente si lo deseas */
+        color: #ecf0f1; /* Color de texto predeterminado para el body */
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7); /* Capa oscura semi-transparente */
+        min-height: 100vh; /* Ocupa toda la altura de la vista */
+        padding: 40px 20px; /* Padding superior para el título */
+        display: flex;
+        flex-direction: column; /* Apila el título y el formulario verticalmente */
+        justify-content: flex-start; /* Alinea el contenido desde arriba */
+        align-items: center; /* Centra el contenido horizontalmente */
+        color: white;
+        text-align: center;
+    }
+
+    .form-container {
+        background-color: #333; /* Fondo oscuro del formulario */
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        margin: 0 auto; /* Centra el contenedor del formulario */
+        color: #f8f9fa; /* Texto claro dentro del formulario */
+        width: 100%; /* Permite que ocupe el ancho disponible */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left; /* Alinea etiquetas e inputs a la izquierda */
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #f8f9fa;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group select { /* Incluye el select en los estilos de input */
+            width: calc(100% - 22px); /* Ancho ajustado para padding y borde */
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #444;
+            color: #f8f9fa;
+            font-size: 16px;
+            box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+        }
+
+            .form-group input[type="text"]:focus,
+            .form-group input[type="tel"]:focus,
+            .form-group input[type="email"]:focus,
+            .form-group select:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+    .form-actions {
+        text-align: right;
+        margin-top: 30px;
+    }
+
+    .btn-verde, .btn-gris {
+        display: inline-block;
+        padding: 10px 25px;
+        margin-left: 10px;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-verde {
+        background-color: #28a745; /* Verde estándar de Bootstrap para éxito */
+    }
+
+        .btn-verde:hover {
+            background-color: #218838;
+        }
+
+    .btn-gris {
+        background-color: #6c757d; /* Gris estándar de Bootstrap para secundario */
+    }
+
+        .btn-gris:hover {
+            background-color: #5a6268;
+        }
+
+    h1 {
+        color: #f8f9fa;
+        text-align: center;
+        margin-bottom: 25px;
+        width: 100%; /* Asegura que el título ocupe el ancho completo del overlay */
+    }
+
+    footer {
+        display: none; /* Oculta el footer si tu _Layout lo incluye y no lo quieres aquí */
+    }
+</style>
+
+<div class="overlay">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="form-container">
+        <form action="/Socio/Crear" method="post">
+            <div class="form-group">
+                <label for="nombreSocio">Nombre:</label>
+                <input type="text" id="nombreSocio" name="Nombre" required />
+            </div>
+
+            <div class="form-group">
+                <label for="apellidoSocio">Apellido:</label>
+                <input type="text" id="apellidoSocio" name="Apellido" required />
+            </div>
+
+            <div class="form-group">
+                <label for="dniSocio">DNI:</label>
+                <input type="text" id="dniSocio" name="Dni" required />
+            </div>
+
+            <div class="form-group">
+                <label for="emailSocio">Email:</label>
+                <input type="email" id="emailSocio" name="Email" />
+            </div>
+
+            <div class="form-group">
+                <label for="estadoSocio">Estado:</label>
+                <select id="estadoSocio" name="Estado">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                    <option value="Pendiente">Pendiente</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-verde">Crear</button>
+                <a href="@Url.Action("Index", "Socios")" class="btn-gris">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
