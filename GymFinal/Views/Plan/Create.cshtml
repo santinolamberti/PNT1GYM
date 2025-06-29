@@ -1,93 +1,89 @@
 ﻿@model GymFinal.Models.Plan
+
 @{
-    ViewData["Title"] = "Agregar Plan";
+	ViewData["Title"] = "Agregar Plan";
 }
 
 <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+	html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 
-    .overlay {
-        background-color: rgba(0, 0, 0, 0.8);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-    }
+	.overlay {
+		background-color: rgba(0, 0, 0, 0.8);
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 30px;
+	}
 
-    .form-container {
-        background-color: white;
-        color: black;
-        border-radius: 10px;
-        padding: 30px;
-        width: 100%;
-        max-width: 600px;
-    }
+	.form-container {
+		background-color: rgba(255, 255, 255, 0.95);
+		border-radius: 10px;
+		padding: 30px;
+		color: black;
+		width: 100%;
+		max-width: 600px;
+	}
 
-    .btn-verde {
-        background-color: #145A32;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 6px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+	.btn-verde {
+		background-color: #145A32;
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 6px;
+		margin-top: 20px;
+		font-weight: bold;
+	}
 
-        .btn-verde:hover {
-            background-color: #117A3B;
-        }
+		.btn-verde:hover {
+			background-color: #117A3B;
+		}
 
-    .btn-gris {
-        background-color: #7F8C8D;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 6px;
-        margin-top: 10px;
-        font-weight: bold;
-    }
-
-        .btn-gris:hover {
-            background-color: #626e70;
-        }
+	footer {
+		display: none;
+	}
 </style>
 
 <div class="overlay">
-    <div class="form-container">
-        <h2>Agregar Plan</h2>
-        <form asp-action="Create" method="post">
-            <div class="form-group mb-3">
-                <label asp-for="NombrePlan"></label>
-                <input asp-for="NombrePlan" class="form-control" />
-                <span asp-validation-for="NombrePlan" class="text-danger"></span>
-            </div>
+	<div class="form-container">
+		<h2 class="text-center mb-4">Agregar Plan</h2>
 
-            <div class="form-group mb-3">
-                <label asp-for="DescripcionPlan"></label>
-                <input asp-for="DescripcionPlan" class="form-control" />
-            </div>
+		<form asp-action="Create" method="post">
+			@Html.AntiForgeryToken()
 
-            <div class="form-group mb-3">
-                <label asp-for="Precio"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
+			<div class="form-group mb-3">
+				<label asp-for="NombrePlan"></label>
+				<input asp-for="NombrePlan" class="form-control" />
+				<span asp-validation-for="NombrePlan" class="text-danger"></span>
+			</div>
 
-            <button type="submit" class="btn-verde w-100">Guardar</button>
-            <a asp-action="Index" class="btn-gris w-100">Cancelar</a>
-        </form>
-    </div>
+			<div class="form-group mb-3">
+				<label asp-for="DescripcionPlan"></label>
+				<input asp-for="DescripcionPlan" class="form-control" />
+				<span asp-validation-for="DescripcionPlan" class="text-danger"></span>
+			</div>
+
+			<div class="form-group mb-3">
+				<label asp-for="Precio"></label>
+				<input asp-for="Precio" class="form-control" />
+				<span asp-validation-for="Precio" class="text-danger"></span>
+			</div>
+
+			<button type="submit" class="btn-verde w-100">Guardar</button>
+			<a asp-action="Index" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+		</form>
+	</div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+	<partial name="_ValidationScriptsPartial" />
 }

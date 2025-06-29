@@ -21,76 +21,6 @@ namespace GymFinal.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ActividadEmpleado", b =>
-                {
-                    b.Property<int>("ActividadesCodActividad")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmpleadosLegajo")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActividadesCodActividad", "EmpleadosLegajo");
-
-                    b.HasIndex("EmpleadosLegajo");
-
-                    b.ToTable("EmpleadoActividad", (string)null);
-                });
-
-            modelBuilder.Entity("GymFinal.Models.Actividad", b =>
-                {
-                    b.Property<int>("CodActividad")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodActividad"));
-
-                    b.Property<int>("DuracionMins")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdSede")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CodActividad");
-
-                    b.HasIndex("IdSede");
-
-                    b.ToTable("Actividades");
-                });
-
-            modelBuilder.Entity("GymFinal.Models.Empleado", b =>
-                {
-                    b.Property<int>("Legajo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Legajo"));
-
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Dni")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdSede")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Legajo");
-
-                    b.HasIndex("IdSede");
-
-                    b.ToTable("Empleados");
-                });
-
             modelBuilder.Entity("GymFinal.Models.Plan", b =>
                 {
                     b.Property<int>("IdPlan")
@@ -182,43 +112,6 @@ namespace GymFinal.Migrations
                     b.ToTable("Socios");
                 });
 
-            modelBuilder.Entity("ActividadEmpleado", b =>
-                {
-                    b.HasOne("GymFinal.Models.Actividad", null)
-                        .WithMany()
-                        .HasForeignKey("ActividadesCodActividad")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GymFinal.Models.Empleado", null)
-                        .WithMany()
-                        .HasForeignKey("EmpleadosLegajo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GymFinal.Models.Actividad", b =>
-                {
-                    b.HasOne("GymFinal.Models.Sede", "Sede")
-                        .WithMany("Actividades")
-                        .HasForeignKey("IdSede")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Sede");
-                });
-
-            modelBuilder.Entity("GymFinal.Models.Empleado", b =>
-                {
-                    b.HasOne("GymFinal.Models.Sede", "Sede")
-                        .WithMany("Empleados")
-                        .HasForeignKey("IdSede")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Sede");
-                });
-
             modelBuilder.Entity("GymFinal.Models.Socio", b =>
                 {
                     b.HasOne("GymFinal.Models.Plan", "Plan")
@@ -241,10 +134,6 @@ namespace GymFinal.Migrations
 
             modelBuilder.Entity("GymFinal.Models.Sede", b =>
                 {
-                    b.Navigation("Actividades");
-
-                    b.Navigation("Empleados");
-
                     b.Navigation("Socios");
                 });
 #pragma warning restore 612, 618

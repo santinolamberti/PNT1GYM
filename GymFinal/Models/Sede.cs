@@ -15,10 +15,6 @@ namespace GymFinal.Models
 
         public string Telefono { get; set; }
 
-        public ICollection<Empleado> Empleados { get; set; } = new List<Empleado>();
-
-        public ICollection<Actividad> Actividades { get; set; } = new List<Actividad>();
-
         public ICollection<Socio> Socios { get; set; } = new List<Socio>();
     }
 }

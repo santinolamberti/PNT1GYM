@@ -7,8 +7,6 @@ namespace GymFinal.Models
             public DbSet<Socio> Socios { get; set; }
             public DbSet<Plan> Planes { get; set; }
             public DbSet<Sede> Sedes { get; set; }
-            public DbSet<Empleado> Empleados { get; set; }
-            public DbSet<Actividad> Actividades { get; set; }
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
@@ -17,27 +15,5 @@ namespace GymFinal.Models
 
                 base.OnConfiguring(optionsBuilder);
             }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Relación muchos-a-muchos sin cascada
-            modelBuilder.Entity<Empleado>()
-                .HasMany(e => e.Actividades)
-                .WithMany(a => a.Empleados)
-                .UsingEntity(j => j.ToTable("EmpleadoActividad"));
-
-            // Desactivar cascada para evitar conflicto
-            modelBuilder.Entity<Actividad>()
-                .HasOne(a => a.Sede)
-                .WithMany(s => s.Actividades)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Empleado>()
-                .HasOne(e => e.Sede)
-                .WithMany(s => s.Empleados)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

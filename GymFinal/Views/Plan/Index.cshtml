@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<GymFinal.Models.Plan>
+
 @{
     ViewData["Title"] = "Planes";
 }
@@ -8,14 +9,14 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000');
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
 
     .overlay {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.75);
         min-height: 100vh;
         padding: 40px;
         color: white;
@@ -28,19 +29,57 @@
         padding: 10px 20px;
         border-radius: 6px;
         font-weight: bold;
-        margin-bottom: 20px;
+        text-decoration: none;
     }
 
         .btn-verde:hover {
             background-color: #117A3B;
+            color: white;
         }
 
-    table {
+    .btn-amarillo {
+        background-color: #F1C40F;
+        color: black;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn-rojo {
+        background-color: #E74C3C;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .tabla-blanca {
         background-color: white;
         color: black;
-        border-radius: 10px;
-        padding: 20px;
         width: 100%;
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    table th, table td {
+        padding: 12px 16px;
+        text-align: left;
+    }
+
+    table th {
+        background-color: #f4f4f4;
+    }
+
+    .acciones {
+        display: flex;
+        gap: 10px;
+    }
+
+    footer {
+        display: none;
     }
 </style>
 
@@ -48,28 +87,30 @@
     <h2>Planes</h2>
     <a asp-action="Create" class="btn-verde">Agregar Plan</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var plan in Model)
-            {
+    <div class="tabla-blanca mt-4">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@plan.NombrePlan</td>
-                    <td>@plan.DescripcionPlan</td>
-                    <td>@plan.Precio.ToString("C")</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@plan.IdPlan" class="btn btn-warning btn-sm">Editar</a>
-                        <a asp-action="Delete" asp-route-id="@plan.IdPlan" class="btn btn-danger btn-sm">Eliminar</a>
-                    </td>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NombrePlan</td>
+                        <td>@item.DescripcionPlan</td>
+                        <td>$ @item.Precio.ToString("N2")</td>
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-id="@item.IdPlan" class="btn-amarillo">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@item.IdPlan" class="btn-rojo">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
