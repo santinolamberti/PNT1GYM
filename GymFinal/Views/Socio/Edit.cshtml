@@ -89,7 +89,7 @@
 
             <div class="form-group mb-3">
                 <label asp-for="IdPlan">Plan</label>
-                <select asp-for="IdPlan" class="form-control" asp-items="@(new SelectList(planes, "IdPlan", "Nombre"))">
+                <select asp-for="IdPlan" class="form-control" asp-items="@(new SelectList(planes, "IdPlan", "NombrePlan"))">
                     <option value="">-- Seleccione un plan --</option>
                 </select>
                 <span asp-validation-for="IdPlan" class="text-danger"></span>

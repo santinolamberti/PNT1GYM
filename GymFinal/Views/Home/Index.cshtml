@@ -56,7 +56,8 @@
 <div class="overlay">
     <h2>Panel de Administración del Gimnasio</h2>
 
-    <a href="@Url.Action("Index", "Sede")" class="btn-verde">Sedes</a>
-    <a href="@Url.Action("Index", "Socio")" class="btn-verde">Socios</a>
-    <a href="@Url.Action("Index", "Plan")" class="btn-verde">Planes</a>
+    <a asp-controller="Sede" asp-action="Index" class="btn-verde">Sedes</a>
+    <a asp-controller="Socio" asp-action="Index" class="btn-verde">Socios</a>
+    <a asp-controller="Plan" asp-action="Index" class="btn-verde">Planes</a>
+    <a asp-controller="Facturacion" asp-action="Index" class="btn-verde">Facturación</a>
 </div>
