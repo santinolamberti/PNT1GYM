@@ -1,10 +1,11 @@
-﻿
+﻿@model List<GymFinal.Models.Socio>
 @{
     ViewData["Title"] = "Gestión de Socios";
+    var sedes = ViewBag.Sedes as List<GymFinal.Models.Sede>;
+    var sedeIdSeleccionada = Context.Request.Query["sedeId"];
 }
 
 <style>
-    /* ... tu CSS aquí ... */
     html, body {
         margin: 0;
         padding: 0;
@@ -18,50 +19,95 @@
     .overlay {
         background-color: rgba(0, 0, 0, 0.7);
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         color: white;
-        text-align: center;
-        padding: 20px;
+        padding: 40px;
     }
 
     .btn-verde {
         background-color: #145A32;
         color: white;
-        font-size: 18px;
-        padding: 12px 20px;
-        margin: 10px 0;
-        width: 250px;
+        font-size: 16px;
+        padding: 10px 16px;
+        margin-right: 8px;
         border: none;
-        border-radius: 8px;
+        border-radius: 6px;
         text-decoration: none !important;
-        display: inline-block;
         transition: background-color 0.3s ease;
     }
-    </select>
 
-        .btn-verde:hover {
-            background-color: #117A3B;
-            color: white;
-        }
+    .btn-verde:hover {
+        background-color: #117A3B;
+    }
 
     h2 {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         font-weight: bold;
     }
 
-    footer {
-        display: none;
+    .form-control {
+        width: 250px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    table {
+        background-color: white;
+        color: black;
     }
 </style>
 
 <div class="overlay">
-    <h2>Socios</h2>
+    <h2>Gestión de Socios</h2>
 
-    <a href="@Url.Action("Crear", "Socio")" class="btn-verde">Crear Socio</a>
-    <a href="@Url.Action("Modificar", "Socio")" class="btn-verde">Modificar Socio</a>
-    <a href="@Url.Action("Eliminar", "Socio")" class="btn-verde">Eliminar Socio</a>
-    <a href="@Url.Action("Index", "Home")" class="btn-verde">Volver al Inicio</a>
+    <div class="mb-3">
+        <a asp-action="Create" class="btn-verde">Agregar Socio</a>
+        <a asp-action="Index" class="btn-verde">Ver Todos</a>
+        <a asp-controller="Home" asp-action="Index" class="btn-verde">Inicio</a>
+    </div>
+
+    <form method="get" asp-action="Index">
+        <label for="sedeId">Filtrar por Sede:</label>
+        <select name="sedeId" id="sedeId" class="form-control" onchange="this.form.submit()">
+            <option value="">-- Todas las sedes --</option>
+            @foreach (var sede in sedes)
+            {
+                bool seleccionado = sedeIdSeleccionada == sede.IdSede.ToString();
+                <option value="@sede.IdSede" selected="@(seleccionado ? "selected" : null)">
+                    @sede.Nombre
+                </option>
+            }
+
+        </select>
+    </form>
+
+    <table class="table table-striped mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Sede</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var socio in Model)
+            {
+                <tr>
+                    <td>@socio.Nombre</td>
+                    <td>@socio.Apellido</td>
+                    <td>@socio.Dni</td>
+                    <td>@socio.Email</td>
+                    <td>@socio.Plan?.NombrePlan</td>
+                    <td>@socio.Sede?.Nombre</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@socio.IdSocio" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@socio.IdSocio" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que desea eliminar este socio?');">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
