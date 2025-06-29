@@ -21,13 +21,13 @@ namespace GymFinal.Models
 
         public bool EstaActivo { get; set; }
 
-        // Relaciones
+        // Relaciones opcionales
         [ForeignKey("Plan")]
-        public int IdPlan { get; set; }
-        public Plan Plan { get; set; }
+        public int? IdPlan { get; set; }
+        public Plan? Plan { get; set; }
 
         [ForeignKey("Sede")]
-        public int IdSede { get; set; }
-        public Sede Sede { get; set; }
+        public int? IdSede { get; set; }
+        public Sede? Sede { get; set; }
     }
 }

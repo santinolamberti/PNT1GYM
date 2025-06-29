@@ -1,8 +1,63 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Página Principal";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .btn-verde {
+        background-color: #145A32;
+        color: white;
+        font-size: 18px;
+        padding: 12px 20px;
+        margin: 10px 0;
+        width: 250px;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none !important;
+        display: inline-block;
+    }
+
+        .btn-verde:hover {
+            background-color: #117A3B;
+            color: white;
+        }
+
+    h2 {
+        margin-bottom: 40px;
+        font-weight: bold;
+    }
+
+    footer {
+        display: none;
+    }
+</style>
+
+<div class="overlay">
+    <h2>Panel de Administración del Gimnasio</h2>
+
+    <a asp-controller="Sede" asp-action="Index" class="btn-verde">Sedes</a>
+    <a asp-controller="Socio" asp-action="Index" class="btn-verde">Socios</a>
+    <a asp-controller="Plan" asp-action="Index" class="btn-verde">Planes</a>
+    <a asp-controller="Facturacion" asp-action="Index" class="btn-verde">Facturación</a>
 </div>

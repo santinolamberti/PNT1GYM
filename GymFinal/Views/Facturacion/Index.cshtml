@@ -1,0 +1,111 @@
+﻿@model List<GymFinal.Models.Facturacion>
+@{
+    ViewData["Title"] = "Facturación por Sede";
+    var sedes = ViewBag.Sedes as List<GymFinal.Models.Sede> ?? new List<GymFinal.Models.Sede>();
+    var sedeIdSeleccionada = Context.Request.Query["sedeId"];
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        min-height: 100vh;
+        color: white;
+        padding: 40px;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: black;
+    }
+
+    .form-control {
+        margin-bottom: 20px;
+    }
+
+    .btn-filtrar {
+        background-color: #145A32;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+        .btn-filtrar:hover {
+            background-color: #117A3B;
+        }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: white;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #145A32;
+        color: white;
+    }
+
+    footer {
+        display: none;
+    }
+</style>
+
+<div class="overlay">
+    <div class="container">
+        <h2>Facturación por Sede</h2>
+
+        <form method="get" asp-action="Index">
+            <label for="sedeId">Filtrar por Sede:</label>
+            <select name="sedeId" id="sedeId" class="form-control" onchange="this.form.submit()">
+                <option value="">-- Todas las sedes --</option>
+                @foreach (var sede in sedes)
+                {
+                    bool seleccionado = sedeIdSeleccionada == sede.IdSede.ToString();
+                    <option value="@sede.IdSede" selected="@(seleccionado ? "selected" : null)">
+                        @sede.Nombre
+                    </option>
+                }
+            </select>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sede</th>
+                    <th>Total Facturado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NombreSede</td>
+                        <td>$ @item.Total.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
