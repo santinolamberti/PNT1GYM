@@ -16,7 +16,6 @@ namespace GymFinal.Models
         public double Precio { get; set; }
 
         public ICollection<Socio> Socios { get; set; }
-        //aca también
-        //aca va a haber conflicto
+
     }
 }

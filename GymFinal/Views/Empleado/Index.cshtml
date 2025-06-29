@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Página Principal";
+﻿
+@{
+    ViewData["Title"] = "Gestión de Empleados";
 }
 
 <style>
+    /* ... tu CSS aquí ... */
     html, body {
         margin: 0;
         padding: 0;
@@ -36,6 +38,7 @@
         border-radius: 8px;
         text-decoration: none !important;
         display: inline-block;
+        transition: background-color 0.3s ease;
     }
 
         .btn-verde:hover {
@@ -49,16 +52,15 @@
     }
 
     footer {
-        display: none; /* Oculta el footer y elimina la línea blanca */
+        display: none;
     }
 </style>
 
 <div class="overlay">
-    <h2>Panel de Administración del Gimnasio</h2>
+    <h2>Empleados</h2>
 
-    <a href="@Url.Action("Index", "Sede")" class="btn-verde">Sedes</a>
-    <a href="@Url.Action("Index", "Socio")" class="btn-verde">Socios</a>
-    <a href="@Url.Action("Index", "Plan")" class="btn-verde">Planes</a>
-    <a href="@Url.Action("Index", "Actividad")" class="btn-verde">Actividades</a>
-    <a href="@Url.Action("Index", "Empleado")" class="btn-verde">Empleados</a>
+    <a href="@Url.Action("Crear", "Empleado")" class="btn-verde">Crear Empleado</a>
+    <a href="@Url.Action("Modificar", "Empleado")" class="btn-verde">Modificar Empleado</a>
+    <a href="@Url.Action("Eliminar", "Empleado")" class="btn-verde">Eliminar Empleado</a>
+    <a href="@Url.Action("Index", "Home")" class="btn-verde">Volver al Inicio</a>
 </div>

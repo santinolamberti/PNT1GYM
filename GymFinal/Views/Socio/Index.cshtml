@@ -1,0 +1,113 @@
+﻿@model List<GymFinal.Models.Socio>
+@{
+    ViewData["Title"] = "Gestión de Socios";
+    var sedes = ViewBag.Sedes as List<GymFinal.Models.Sede>;
+    var sedeIdSeleccionada = Context.Request.Query["sedeId"];
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        min-height: 100vh;
+        color: white;
+        padding: 40px;
+    }
+
+    .btn-verde {
+        background-color: #145A32;
+        color: white;
+        font-size: 16px;
+        padding: 10px 16px;
+        margin-right: 8px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none !important;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-verde:hover {
+        background-color: #117A3B;
+    }
+
+    h2 {
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 250px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    table {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+<div class="overlay">
+    <h2>Gestión de Socios</h2>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn-verde">Agregar Socio</a>
+        <a asp-action="Index" class="btn-verde">Ver Todos</a>
+        <a asp-controller="Home" asp-action="Index" class="btn-verde">Inicio</a>
+    </div>
+
+    <form method="get" asp-action="Index">
+        <label for="sedeId">Filtrar por Sede:</label>
+        <select name="sedeId" id="sedeId" class="form-control" onchange="this.form.submit()">
+            <option value="">-- Todas las sedes --</option>
+            @foreach (var sede in sedes)
+            {
+                bool seleccionado = sedeIdSeleccionada == sede.IdSede.ToString();
+                <option value="@sede.IdSede" selected="@(seleccionado ? "selected" : null)">
+                    @sede.Nombre
+                </option>
+            }
+
+        </select>
+    </form>
+
+    <table class="table table-striped mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Sede</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var socio in Model)
+            {
+                <tr>
+                    <td>@socio.Nombre</td>
+                    <td>@socio.Apellido</td>
+                    <td>@socio.Dni</td>
+                    <td>@socio.Email</td>
+                    <td>@socio.Plan?.NombrePlan</td>
+                    <td>@socio.Sede?.Nombre</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@socio.IdSocio" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@socio.IdSocio" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que desea eliminar este socio?');">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
