@@ -18,4 +18,6 @@ namespace GymFinal.Models
         public ICollection<Socio> Socios { get; set; }
         Console.Writeline("");
     }
+
+    //prueba
 }
