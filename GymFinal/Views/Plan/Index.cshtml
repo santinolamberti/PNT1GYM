@@ -1,66 +1,75 @@
-﻿
+﻿@model IEnumerable<GymFinal.Models.Plan>
 @{
-    ViewData["Title"] = "Gestión de Planes";
+    ViewData["Title"] = "Planes";
 }
 
 <style>
-    /* ... tu CSS aquí ... */
     html, body {
         margin: 0;
         padding: 0;
         height: 100%;
-        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
 
     .overlay {
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.8);
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding: 40px;
         color: white;
-        text-align: center;
-        padding: 20px;
     }
 
     .btn-verde {
         background-color: #145A32;
         color: white;
-        font-size: 18px;
-        padding: 12px 20px;
-        margin: 10px 0;
-        width: 250px;
         border: none;
-        border-radius: 8px;
-        text-decoration: none !important;
-        display: inline-block;
-        transition: background-color 0.3s ease;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: bold;
+        margin-bottom: 20px;
     }
 
         .btn-verde:hover {
             background-color: #117A3B;
-            color: white;
         }
 
-    h2 {
-        margin-bottom: 40px;
-        font-weight: bold;
-    }
-
-    footer {
-        display: none;
+    table {
+        background-color: white;
+        color: black;
+        border-radius: 10px;
+        padding: 20px;
+        width: 100%;
     }
 </style>
 
 <div class="overlay">
     <h2>Planes</h2>
+    <a asp-action="Create" class="btn-verde">Agregar Plan</a>
 
-    <a href="@Url.Action("Crear", "Plan")" class="btn-verde">Crear Plan</a>
-    <a href="@Url.Action("Modificar", "Plan")" class="btn-verde">Modificar Plan</a>
-    <a href="@Url.Action("Eliminar", "Plan")" class="btn-verde">Eliminar Plan</a>
-    <a href="@Url.Action("Index", "Home")" class="btn-verde">Volver al Inicio</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var plan in Model)
+            {
+                <tr>
+                    <td>@plan.NombrePlan</td>
+                    <td>@plan.DescripcionPlan</td>
+                    <td>@plan.Precio.ToString("C")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@plan.IdPlan" class="btn btn-warning btn-sm">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@plan.IdPlan" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

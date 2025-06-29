@@ -31,8 +31,7 @@ namespace GymFinal.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Planes = _context.Planes.ToList();
-            ViewBag.Sedes = _context.Sedes.ToList();
+            CargarViewBags();
             return View();
         }
 
@@ -48,16 +47,17 @@ namespace GymFinal.Controllers
 
             ViewBag.Planes = _context.Planes.ToList();
             ViewBag.Sedes = _context.Sedes.ToList();
+
             return View(socio);
         }
+
 
         public IActionResult Edit(int id)
         {
             var socio = _context.Socios.Find(id);
             if (socio == null) return NotFound();
 
-            ViewBag.Planes = _context.Planes.ToList();
-            ViewBag.Sedes = _context.Sedes.ToList();
+            CargarViewBags();
             return View(socio);
         }
 
@@ -71,8 +71,7 @@ namespace GymFinal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Planes = _context.Planes.ToList();
-            ViewBag.Sedes = _context.Sedes.ToList();
+            CargarViewBags();
             return View(socio);
         }
 
@@ -85,6 +84,12 @@ namespace GymFinal.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
+        }
+
+        private void CargarViewBags()
+        {
+            ViewBag.Planes = _context.Planes.ToList();
+            ViewBag.Sedes = _context.Sedes.ToList();
         }
     }
 }

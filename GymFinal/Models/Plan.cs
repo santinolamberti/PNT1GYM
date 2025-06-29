@@ -15,7 +15,7 @@ namespace GymFinal.Models
         [Required]
         public double Precio { get; set; }
 
-        public ICollection<Socio> Socios { get; set; }
+        public ICollection<Socio> Socios { get; set; } = new List<Socio>();
 
     }
 }

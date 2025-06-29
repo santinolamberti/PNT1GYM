@@ -1,28 +1,77 @@
-﻿using Microsoft.AspNetCore.Mvc; // Para ASP.NET Core MVC
+﻿using Microsoft.AspNetCore.Mvc;
+using GymFinal.Models;
+using System.Linq;
 
-namespace GymFinal.Controllers // Asegúrate de que el namespace sea el de tu proyecto
+namespace GymFinal.Controllers
 {
     public class PlanController : Controller
     {
-        // GET: Plan
-        public IActionResult Index() // IActionResult para ASP.NET Core MVC
+        private readonly GimnasioContext _context;
+
+        public PlanController()
+        {
+            _context = new GimnasioContext();
+        }
+
+        // GET: /Plan
+        public IActionResult Index()
+        {
+            var planes = _context.Planes.ToList();
+            return View(planes);
+        }
+
+        // GET: /Plan/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Crear()
+        // POST: /Plan/Create
+        [HttpPost]
+        public IActionResult Create(Plan plan)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _context.Planes.Add(plan);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(plan);
         }
 
-        public IActionResult Modificar()
+        // GET: /Plan/Edit/5
+        public IActionResult Edit(int id)
         {
-            return View();
+            var plan = _context.Planes.Find(id);
+            if (plan == null)
+                return NotFound();
+
+            return View(plan);
         }
 
-        public IActionResult Eliminar()
+        // POST: /Plan/Edit
+        [HttpPost]
+        public IActionResult Edit(Plan plan)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _context.Planes.Update(plan);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(plan);
+        }
+
+        // GET: /Plan/Delete/5
+        public IActionResult Delete(int id)
+        {
+            var plan = _context.Planes.Find(id);
+            if (plan != null)
+            {
+                _context.Planes.Remove(plan);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

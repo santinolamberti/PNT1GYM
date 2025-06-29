@@ -2,8 +2,8 @@
 
 @{
     ViewData["Title"] = "Editar Socio";
-    var planes = ViewBag.Planes as List<GymFinal.Models.Plan>;
-    var sedes = ViewBag.Sedes as List<GymFinal.Models.Sede>;
+    var planes = ViewBag.Planes as List<GymFinal.Models.Plan> ?? new List<GymFinal.Models.Plan>();
+    var sedes = ViewBag.Sedes as List<GymFinal.Models.Sede> ?? new List<GymFinal.Models.Sede>();
 }
 
 <style>
