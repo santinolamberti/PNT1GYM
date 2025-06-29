@@ -29,7 +29,7 @@ namespace GymFinal.Controllers
             return View(socios.ToList());
         }
 
-        public IActionResult Create()
+        public IActionResult Crear()
         {
             ViewBag.Planes = _context.Planes.ToList();
             ViewBag.Sedes = _context.Sedes.ToList();
@@ -37,7 +37,7 @@ namespace GymFinal.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Socio socio)
+        public IActionResult Crear(Socio socio)
         {
             if (ModelState.IsValid)
             {
