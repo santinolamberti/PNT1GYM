@@ -1,0 +1,98 @@
+﻿@model GymFinal.Models.Sede
+
+@{
+    ViewData["Title"] = "Agregar Sede";
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGhlJTIwZ3ltfGVufDB8fDB8fHww');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 30px;
+    }
+
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        padding: 30px;
+        color: black;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .btn-verde {
+        background-color: #145A32;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+        .btn-verde:hover {
+            background-color: #117A3B;
+        }
+
+    .btn-gris {
+        background-color: #7F8C8D;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+        .btn-gris:hover {
+            background-color: #626e70;
+        }
+</style>
+
+<div class="overlay">
+    <div class="form-container">
+        <h2 class="text-center mb-4">Agregar Sede</h2>
+
+        <form asp-action="Create" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Direccion"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Telefono"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-verde">Guardar</button>
+            <a asp-action="Index" class="btn-gris">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

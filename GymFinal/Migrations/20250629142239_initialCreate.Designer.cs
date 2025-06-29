@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymFinal.Migrations
 {
     [DbContext(typeof(GimnasioContext))]
-    [Migration("20250628225419_Inicial")]
-    partial class Inicial
+    [Migration("20250629142239_initialCreate")]
+    partial class initialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,10 +166,10 @@ namespace GymFinal.Migrations
                     b.Property<bool>("EstaActivo")
                         .HasColumnType("bit");
 
-                    b.Property<int>("IdPlan")
+                    b.Property<int?>("IdPlan")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdSede")
+                    b.Property<int?>("IdSede")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -226,15 +226,11 @@ namespace GymFinal.Migrations
                 {
                     b.HasOne("GymFinal.Models.Plan", "Plan")
                         .WithMany("Socios")
-                        .HasForeignKey("IdPlan")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdPlan");
 
                     b.HasOne("GymFinal.Models.Sede", "Sede")
                         .WithMany("Socios")
-                        .HasForeignKey("IdSede")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdSede");
 
                     b.Navigation("Plan");
 

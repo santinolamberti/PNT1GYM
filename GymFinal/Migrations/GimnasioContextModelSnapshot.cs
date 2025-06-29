@@ -163,10 +163,10 @@ namespace GymFinal.Migrations
                     b.Property<bool>("EstaActivo")
                         .HasColumnType("bit");
 
-                    b.Property<int>("IdPlan")
+                    b.Property<int?>("IdPlan")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdSede")
+                    b.Property<int?>("IdSede")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -223,15 +223,11 @@ namespace GymFinal.Migrations
                 {
                     b.HasOne("GymFinal.Models.Plan", "Plan")
                         .WithMany("Socios")
-                        .HasForeignKey("IdPlan")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdPlan");
 
                     b.HasOne("GymFinal.Models.Sede", "Sede")
                         .WithMany("Socios")
-                        .HasForeignKey("IdSede")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdSede");
 
                     b.Navigation("Plan");
 

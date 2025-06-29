@@ -5,7 +5,7 @@
 namespace GymFinal.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -94,8 +94,8 @@ namespace GymFinal.Migrations
                     Dni = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EstaActivo = table.Column<bool>(type: "bit", nullable: false),
-                    IdPlan = table.Column<int>(type: "int", nullable: false),
-                    IdSede = table.Column<int>(type: "int", nullable: false)
+                    IdPlan = table.Column<int>(type: "int", nullable: true),
+                    IdSede = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,14 +104,12 @@ namespace GymFinal.Migrations
                         name: "FK_Socios_Planes_IdPlan",
                         column: x => x.IdPlan,
                         principalTable: "Planes",
-                        principalColumn: "IdPlan",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdPlan");
                     table.ForeignKey(
                         name: "FK_Socios_Sedes_IdSede",
                         column: x => x.IdSede,
                         principalTable: "Sedes",
-                        principalColumn: "IdSede",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdSede");
                 });
 
             migrationBuilder.CreateTable(
